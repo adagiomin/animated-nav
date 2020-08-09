@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h3 {
+            margin: 0;
+            padding: 0;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        body {
+            background-color: blanchedalmond;
+        }
+
+        /* 头像 */
+        .head {
+            position: absolute;
+            width: 200px;
+            height: 240px;
+            top: 15%;
+            margin: 0 5%;
+            background-color: #fff;
+            border: 2px solid #fff;
+            border-radius: .5em;
+            overflow: hidden;
+            text-align: center;
+            color: #4e4839;
+            cursor: pointer;
+        }
+
+        .head>img {
+            width: 100%;
+            height: 85%;
+        }
+
+        .nav .btn-nav {
+            position: fixed;
+            top: 50px;
+            left: 50px;
+            background: transparent;
+            border: 0;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 9999;
+        }
+
+        .nav .icon-bar {
+            display: block;
+            margin: 6px 0;
+            width: 70px;
+            height: 8px;
+            background-color: #9AAD75;
+            box-shadow: rgba(0, 0, 0, 0.2) 1px 1px 0;
+        }
+
+        /* 实现鼠标滑过背景色过渡 */
+        .nav .btn-nav:hover .icon-bar {
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+            background-color: #fff;
+        }
+
+        /* 实现鼠标点击变换 */
+        .nav .animated .top {
+            -webkit-transform: translateY(10px) rotate(45deg);
+            -moz-transform: translateY(10px) rotate(45deg);
+            -ms-transform: translateY(10px) rotate(45deg);
+            -o-transform: translateY(10px) rotate(45deg);
+            transform: translateY(10px) rotate(45deg)
+        }
+
+        .nav .animated .bottom {
+            -webkit-transform: translateY(-3px) rotate(-45deg);
+            -moz-transform: translateY(-3px) rotate(-45deg);
+            -ms-transform: translateY(-3px) rotate(-45deg);
+            -o-transform: translateY(-3px) rotate(-45deg);
+            transform: translateY(-3px) rotate(-45deg)
+        }
+
+        /* 一级菜单 */
+        .nav-content {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: -100%;
+            right: 0;
+            background-color: #E7C4BE;
+            width: 100%;
+            z-index: 9997;
+        }
+
+        /* 一级菜单隐藏动画*/
+        .hideNav {
+            -webkit-animation: hideNav 1s ease forwards;
+            -moz-animation: hideNav 1s ease forwards;
+            -o-animation: hideNav 1s ease forwards;
+            animation: hideNav 1s ease forwards;
+        }
+
+        @keyframes hideNav {
+            from {
+                left: 0;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        @-webkit-keyframes hideNav {
+            from {
+                left: 0;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        @-moz-keyframes hideNav {
+            from {
+                left: 0;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        @-o-keyframes hideNav {
+            from {
+                left: 0;
+            }
+
+            to {
+                left: -100%;
+            }
+        }
+
+        /* 一级菜单显示动画 */
+        /*显示菜单动画*/
+        .showNav {
+            -webkit-animation: showNav 1s ease forwards;
+            -moz-animation: showNav 1s ease forwards;
+            -o-animation: showNav 1s ease forwards;
+            animation: showNav 1s ease forwards;
+        }
+
+        @keyframes showNav {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        @-webkit-keyframes showNav {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        @-moz-keyframes showNav {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        @-o-keyframes showNav {
+            from {
+                left: -100%;
+            }
+
+            to {
+                left: 0;
+            }
+        }
+
+        /* 一级菜单导航列表 */
+        .nav-content .nav-list {
+            list-style: none;
+            padding: 0;
+            position: relative;
+            top: 20%;
+        }
+
+        .nav-content .nav-list .nav-item {
+            margin: 30px auto;
+            margin-left: 42%;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .nav-content .nav-list .nav_i_1 {
+            -webkit-animation: nav_i_1 0s ease forwards;
+            -moz-animation: nav_i_1 0s ease forwards;
+            -o-animation: nav_i_1 0s ease forwards;
+            animation: nav_i_1 0s ease forwards;
+        }
+
+        /* 右侧菜单打开的时候，左侧菜单一级头像都要向左移动 */
+        .nav-content .nav-list .nav-item-left {
+            margin-left: 30%;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        @-webkit-keyframes nav_i_1 {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(-100%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: none;
+            }
+        }
+
+        @keyframes nav_i_1 {
+            from {
+                opacity: 0;
+                -moz-transform: translate3d(-100%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                -moz-transform: none;
+            }
+        }
+
+        @keyframes nav_i_1 {
+            from {
+                opacity: 0;
+                -o-transform: translate3d(-100%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                -o-transform: none;
+            }
+        }
+
+        @keyframes nav_i_1 {
+            from {
+                opacity: 0;
+                transform: translate3d(-100%, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* 一级菜单每一项 */
+        .item-anchor {
+            position: relative;
+            padding: 10px;
+            color: #4E4839;
+            font-size: 28px;
+            font-family: "思源黑体";
+            text-decoration: none;
+        }
+
+        .item-anchor:hover,
+        .item-anchor:focus {
+            color: #000;
+            text-decoration: none;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .item-anchor:after {
+            content: "";
+            position: absolute;
+            width: 3px;
+            height: 5px;
+            left: 0;
+            bottom: 0;
+            z-index: 9;
+            background: transparent;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .item-anchor:hover:after,
+        .item-anchor:focus:after {
+            width: 100%;
+            background: #96AB6F;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        /* 二级菜单 */
+        .nav-content_1 {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 100%;
+            right: 0;
+            background: #FAF3E2;
+            display: block;
+            width: 100%;
+            z-index: 9998;
+        }
+
+        .hidden_1 {
+            display: none;
+        }
+
+        .nav-content_1 .nav-list_1 {
+            position: relative;
+            top: 30%;
+        }
+
+        .nav-content_1 .nav-list_1 .item-anchor i {
+            font-size: 18px;
+            font-weight: normal;
+            font-family: "思源黑体";
+        }
+
+        .nav-content_1 .nav-list_1 .item-anchor:hover i {
+            color: #CE992E;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+        }
+
+        .nav-content_1 .nav-list_1 .nav-item_1 {
+            margin-top: 30px;
+        }
+
+        .nav-content_1 .nav-list_1 .nav-item_1 .nav-item_1 a {
+            margin-left: 10%;
+            font-size: 18px;
+            font-weight: normal;
+        }
+
+        /*显示二级列表*/
+        .showNav_1 {
+            -webkit-animation: showNav_1 1s ease forwards;
+            -moz-animation: showNav_1 1s ease forwards;
+            -o-animation: showNav_1 1s ease forwards;
+            animation: showNav_1 1s ease forwards;
+            box-shadow: -2px 0px 300px #FAF3E2;
+        }
+
+        @keyframes showNav_1 {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: 50%;
+            }
+        }
+
+        @-webkit-keyframes showNav_1 {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: 50%;
+            }
+        }
+
+        @-moz-keyframes showNav_1 {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: 50%;
+            }
+        }
+
+        @-o-keyframes showNav_1 {
+            from {
+                left: 100%;
+            }
+
+            to {
+                left: 50%;
+            }
+        }
+
+        .hideNav_1 {
+            -webkit-animation: hideNav_1 1s ease forwards;
+            -moz-animation: hideNav_1 1s ease forwards;
+            -o-animation: hideNav_1 1s ease forwards;
+            animation: hideNav_1 1s ease forwards;
+        }
+
+        @keyframes hideNav_1 {
+            from {
+                left: 50%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+
+        @-webkit-keyframes hideNav_1 {
+            from {
+                left: 50%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+
+        @-moz-keyframes hideNav_1 {
+            from {
+                left: 50%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+
+        @-o-keyframes hideNav_1 {
+            from {
+                left: 50%;
+            }
+
+            to {
+                left: 100%;
+            }
+        }
+
+        .nav-content_1 .nav-list_1 .nav_i_2 {
+            -webkit-animation: nav_i_2 0s ease forwards;
+            -moz-animation: nav_i_2 0s ease forwards;
+            -o-animation: nav_i_2 0s ease forwards;
+            animation: nav_i_2 0s ease forwards;
+        }
+
+        .nav-content_1 .nav-list_1 .nav-item_1 a {
+            margin-left: 10%;
+            font-size: 18px;
+            font-weight: normal;
+            font-family: "思源黑体";
+        }
+
+        @-webkit-keyframes nav_i_2 {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0)
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+
+        @keyframes nav_i_2 {
+            from {
+                opacity: 0;
+                -webkit-transform: translate3d(100%, 0, 0);
+                transform: translate3d(100%, 0, 0)
+            }
+
+            to {
+                opacity: 1;
+                -webkit-transform: none;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="head">
+        <img src="./head.jpg" alt="">
+        <h3>@Adagio</h3>
+    </div>
+
+    <!-- 导航入口 -->
+    <div class="nav container">
+        <div class="btn-nav">
+            <span class="icon-bar top"></span>
+            <span class="icon-bar bottom"></span>
+        </div>
+    </div>
+    <!-- 一级菜单栏 -->
+    <div class="nav-content hideNav hidden">
+        <ul class="nav-list">
+            <li class="nav-item" id="nav-item-bt"><a href="#" class="item-anchor"><span>CSS学习</span></a></li>
+            <li class="nav-item"><a href="#" class="item-anchor"><span>瀑布布局</span></a></li>
+            <li class="nav-item"><a href="#" class="item-anchor"><span>Sass学习</span></a></li>
+            <li class="nav-item"><a href="#" class="item-anchor"><span>色彩搭配</span></a></li>
+        </ul>
+    </div>
+    <!-- 二级菜单 -->
+    <div class="nav-content_1 hideNav_1 hidden_1">
+        <ul class="nav-list_1">
+            <li class="nav-item_1" style="visibility: visible; animation-duration: 1s;">
+                <a href="#" class="item-anchor">
+                    <i>漂亮的盒子</i>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav-list_1">
+            <li class="nav-item_1" style="visibility: visible; animation-duration: 1.5s;">
+                <a href="#" class="item-anchor">
+                    <i>内容布局</i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script>
+        window.onload = function () {
+            //菜单按钮
+            $('.btn-nav').click(function () {
+                $('.btn-nav').toggleClass("animated")
+                $('.nav-content').toggleClass("hideNav showNav")
+                $('.nav-content').removeClass("hidden")
+                $('.nav-item').toggleClass("nav_i_1")
+                $('.nav-item').each(function (i) { //设置一级菜单每个列表动画持续时间
+                    var time = (i + 1) * 0.4 + "s"
+                    $(this).css("animation-duration", time)
+                })
+                /* 在二级菜单打开的情况下再重选一级菜单 */
+                if ($('.nav-content_1').hasClass("showNav_1")) {
+                    $('.nav-content_1').toggleClass("hideNav_1 showNav_1")
+                    $('.nav-item').toggleClass("nav-item-left")
+                    $('.nav-content_1 .nav-item_1').toggleClass("nav_i_2")
+                }
+            });
+            /* 打开二级菜单 */
+            $('#nav-item-bt').click(function () {
+                $('.nav-content_1').toggleClass("hideNav_1 showNav_1")
+                $('.nav-content_1').removeClass("hidden_1")
+                $('.nav-content_1 .nav-item_1').toggleClass("nav_i_2")
+                $('.nav-item').toggleClass("nav-item-left")
+            });
+        }
+    </script>
+</body>
+
+</html>
